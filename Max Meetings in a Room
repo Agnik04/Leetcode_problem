@@ -1,0 +1,26 @@
+Given the start and finish time of n meetings and just one room to conduct them, find the maximum number of meetings that can be accommodated in that room.
+
+The start and end times are given in minutes from 12:00 AM
+
+
+
+
+
+bool comp (Meeting* A, Meeting* B) {
+   return A->end < B->end;
+}
+int getMaxMeetings(vector<Meeting*> meetings) {
+   sort (meetings.begin(), meetings.end(), comp);
+	for(int i = 0; i < meetings.size(); ++i)
+	{
+		cout << meetings[i]->start << " " << meetings[i]->end << endl;
+	}
+   int maxMeetings = 0, finishTime = 0;
+   for (int i = 0; i < meetings.size(); i++) {
+       if (meetings[i]->start >= finishTime) {
+           maxMeetings++;
+           finishTime = meetings[i]->end;
+       }
+   }
+   return maxMeetings;
+}
